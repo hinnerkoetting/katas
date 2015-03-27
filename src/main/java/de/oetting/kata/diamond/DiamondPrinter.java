@@ -3,11 +3,11 @@ package de.oetting.kata.diamond;
 public class DiamondPrinter {
 
 	public String print(char character) {
-		String upperHalf = createDiamond(character);
-		return removeLastNewLine(upperHalf);
+		String diamong = createDiamond(character);
+		return removeLastNewLineCharacter(diamong);
 	}
 
-	private String removeLastNewLine(String upperHalf) {
+	private String removeLastNewLineCharacter(String upperHalf) {
 		return upperHalf.substring(0, upperHalf.length() - 1);
 	}
 
