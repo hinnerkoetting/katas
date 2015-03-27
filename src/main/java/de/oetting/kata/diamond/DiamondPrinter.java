@@ -12,16 +12,14 @@ public class DiamondPrinter {
 	private String createUpperHalf(char character) {
 		String result = "";
 		for (int i = 0; i < getNumberOfDifferentCharacters(character) - 1; i++) {
-			result += createOutputLine(createNthCharacter(i), getNumberOfDifferentCharacters(character));
-			if (character != 'A')
-				result += '\n';
+			result += createOutputLine(i, character) + '\n';
 		}
 		return result;
 	}
 
 	private String createMiddleLine(char character) {
-		String line = createOutputLine(createNthCharacter(getNumberOfDifferentCharacters(character) - 1),
-				getNumberOfDifferentCharacters(character));
+		String line = createOutputLine(getNumberOfDifferentCharacters(character) - 1,
+				character);
 		if (getNumberOfDifferentCharacters(character) == 1)
 			return line;
 		return line + '\n';
@@ -30,7 +28,7 @@ public class DiamondPrinter {
 	private String createLowerHalf(char character) {
 		String result = "";
 		for (int i = getNumberOfDifferentCharacters(character) - 2; i >= 0; i--) {
-			result += createOutputLine(createNthCharacter(i), getNumberOfDifferentCharacters(character));
+			result += createOutputLine(i, character);
 			if (createNthCharacter(i) != 'A')
 				result += '\n';
 		}
@@ -41,10 +39,10 @@ public class DiamondPrinter {
 		return (char) ('A' + i);
 	}
 
-	private String createOutputLine(char c, int numberOfCharacters) {
-		if (c == 'A')
-			return createTextForA(numberOfCharacters);
-		return createOutputLineForNonA(c, numberOfCharacters);
+	private String createOutputLine(int characterIndex, char inputCharacter) {
+		if (characterIndex == 0)
+			return createTextForA(getNumberOfDifferentCharacters(inputCharacter));
+		return createOutputLineForNonA(createNthCharacter(characterIndex), getNumberOfDifferentCharacters(inputCharacter));
 	}
 
 	private String createOutputLineForNonA(char c, int numberOfCharacters) {
