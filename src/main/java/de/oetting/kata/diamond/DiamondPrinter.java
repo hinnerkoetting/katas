@@ -12,7 +12,7 @@ public class DiamondPrinter {
 	private String createStringUntilBottom(int maxLengthOfDiamond) {
 		String result = "";
 		for (int i = maxLengthOfDiamond - 2; i >= 0; i--) {
-			result += print((char) ('A' + i), maxLengthOfDiamond);
+			result += createOutputLine((char) ('A' + i), maxLengthOfDiamond);
 			if ((char) ('A' + i) != 'A')
 				result += '\n';
 		}
@@ -22,30 +22,31 @@ public class DiamondPrinter {
 	private String createLinesUntilWidestPoint(char character, int numberOfCharacters) {
 		String result = "";
 		for (int i = 0; i < numberOfCharacters; i++) {
-			result += print((char) ('A' + i), numberOfCharacters);
+			result += createOutputLine((char) ('A' + i), numberOfCharacters);
 			if (character != 'A')
 				result += '\n';
 		}
 		return result;
 	}
 
-	private String print(char c, int numberOfCharacters) {
+	private String createOutputLine(char c, int numberOfCharacters) {
 		if (c == 'A')
 			return createTextForA(numberOfCharacters);
-		if (c == 'B')
-			return createTextForB(numberOfCharacters);
-		if (c == 'C')
-			return createTextForC(numberOfCharacters);
+		return createOutputLineForNonA(c, numberOfCharacters);
+	}
 
-		return "D     D";
+	private String createOutputLineForNonA(char c, int numberOfCharacters) {
+		String spacesBefore = timesSpace(numberOfCharacters - (c- 'A') - 1);
+		String characterPlusSpacesBetween = c + timesSpace((c - 'A') * 2 - 1) + c;
+		return spacesBefore + characterPlusSpacesBetween;
 	}
 
 	private String createTextForC(int numberOfCharacters) {
-		return timesSpace(numberOfCharacters - 3) + "C   C";
+		return timesSpace(numberOfCharacters - 3) + "C" + timesSpace(3) + "C";
 	}
 
 	private String createTextForB(int numberOfCharacters) {
-		return timesSpace(numberOfCharacters - 2) + "B B";
+		return timesSpace(numberOfCharacters - 2) + 'B' + timesSpace('B' - 'A') + 'B';
 	}
 
 	private String createTextForA(int numberOfCharacters) {

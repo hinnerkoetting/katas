@@ -21,7 +21,7 @@ public class DiamondPrinterTest {
 
 	@Parameters(name = "testedCharacter = {0}")
 	public static Collection<Object[]> getParameters() {
-		return Arrays.asList(new Object[][] { { 'A' }, { 'B' }, { 'C' }, { 'D' }});
+		return Arrays.asList(new Object[][] { { 'A' }, { 'B' }, { 'C' }, { 'D' }, { 'E' } });
 	}
 
 	public DiamondPrinterTest(char character) {
