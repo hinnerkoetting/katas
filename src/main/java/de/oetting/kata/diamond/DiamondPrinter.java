@@ -7,10 +7,6 @@ public class DiamondPrinter {
 		return removeLastNewLineCharacter(diamong);
 	}
 
-	private String removeLastNewLineCharacter(String upperHalf) {
-		return upperHalf.substring(0, upperHalf.length() - 1);
-	}
-
 	private String createDiamond(char character) {
 		String result = "";
 		for (char currentCharacter : new CharactersForEachLine(character)) {
@@ -25,20 +21,20 @@ public class DiamondPrinter {
 		return createOutputLineForNonA(character, getNumberOfDifferentCharacters(inputCharacter));
 	}
 
-	private String createOutputLineForNonA(char c, int numberOfCharacters) {
-		String spacesBefore = createNumberOfSpacesSpaces(numberOfCharacters - (c - 'A') - 1);
-		String characterPlusSpacesBetween = c + createNumberOfSpacesSpaces((c - 'A') * 2 - 1) + c;
+	private String createOutputLineForNonA(char character, int numberOfCharacters) {
+		String spacesBefore = createNumberOfSpaces(numberOfCharacters - (character - 'A') - 1);
+		String characterPlusSpacesBetween = character + createNumberOfSpaces((character - 'A') * 2 - 1) + character;
 		return spacesBefore + characterPlusSpacesBetween;
 	}
 
 	// This is a special method for A because this will be the only line which
 	// only contains one character
-	private String createTextForA(int numberOfCharacters) {
-		String spaces = createNumberOfSpacesSpaces(numberOfCharacters - 1);
+	private String createTextForA(int numberOfDifferentCharacters) {
+		String spaces = createNumberOfSpaces(numberOfDifferentCharacters - 1);
 		return spaces + "A";
 	}
 
-	private String createNumberOfSpacesSpaces(int times) {
+	private String createNumberOfSpaces(int times) {
 		String result = "";
 		for (int i = 0; i < times; i++)
 			result += ' ';
@@ -49,4 +45,7 @@ public class DiamondPrinter {
 		return character - 'A' + 1;
 	}
 
+	private String removeLastNewLineCharacter(String upperHalf) {
+		return upperHalf.substring(0, upperHalf.length() - 1);
+	}
 }
