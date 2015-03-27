@@ -19,7 +19,7 @@ public class CharactersForEachLine implements Iterable<Character> {
 
 	private final char character;
 	private int currentIndex;
-	
+
 	public CharactersForEachLine(char character) {
 		this.character = character;
 	}
@@ -34,17 +34,18 @@ public class CharactersForEachLine implements Iterable<Character> {
 			public Character next() {
 				currentIndex++;
 				if (isInUpperHalf())
-					return createNthCharacter();
-				
-				return createDescendingCharacterFromTarget() ;
+					return createCharacterAtIndex();
+				return createCharacterfromLowerHalfOfDiamong();
 			}
 
-			private char createDescendingCharacterFromTarget() {
-				return (char)(2 * character - 'A' - currentIndex  + 1);
+			//The idea here is to count down from the target character.
+			//This is done by counting up as usual, but subtracting a difference from currentIndex * 2. This way the character is decreased by 1 each step.
+			private char createCharacterfromLowerHalfOfDiamong() {
+				return (char) (createCharacterAtIndex() + (character - createCharacterAtIndex()) * 2 );
 			}
 
-			private char createNthCharacter() {
-				return (char)('A' + currentIndex - 1);
+			private char createCharacterAtIndex() {
+				return (char) ('A' + currentIndex - 1);
 			}
 
 			private int numberOfDifferentCharacters() {
@@ -52,7 +53,7 @@ public class CharactersForEachLine implements Iterable<Character> {
 			}
 
 			private boolean isInUpperHalf() {
-				return currentIndex <=  numberOfDifferentCharacters() + 1;
+				return currentIndex <= numberOfDifferentCharacters() + 1;
 			}
 		};
 	}
