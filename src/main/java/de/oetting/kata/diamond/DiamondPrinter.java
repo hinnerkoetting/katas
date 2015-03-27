@@ -4,12 +4,20 @@ public class DiamondPrinter {
 
 	public String print(char character) {
 		int numberOfDiffferentCharacters = character - 'A' + 1;
-		String upperHalf = createLinesUntilWidestPoint(character, numberOfDiffferentCharacters);
-		String lowerHalf = createStringUntilBottom(numberOfDiffferentCharacters);
-		return upperHalf + lowerHalf;
+		String upperHalf = createUpperHalf(character, numberOfDiffferentCharacters);
+		String middleLine = createMiddleLine(numberOfDiffferentCharacters);
+		String lowerHalf = createLowerHalf(numberOfDiffferentCharacters);
+		return upperHalf + middleLine + lowerHalf;
 	}
 
-	private String createStringUntilBottom(int maxLengthOfDiamond) {
+	private String createMiddleLine(int numberOfDiffferentCharacters) {
+		String line = createOutputLine(createNthCharacter(numberOfDiffferentCharacters - 1), numberOfDiffferentCharacters);
+		if (numberOfDiffferentCharacters == 1) 
+			return line;
+		return line + '\n';
+	}
+
+	private String createLowerHalf(int maxLengthOfDiamond) {
 		String result = "";
 		for (int i = maxLengthOfDiamond - 2; i >= 0; i--) {
 			result += createOutputLine(createNthCharacter(i), maxLengthOfDiamond);
@@ -19,9 +27,9 @@ public class DiamondPrinter {
 		return result;
 	}
 
-	private String createLinesUntilWidestPoint(char character, int numberOfCharacters) {
+	private String createUpperHalf(char character, int numberOfCharacters) {
 		String result = "";
-		for (int i = 0; i < numberOfCharacters; i++) {
+		for (int i = 0; i < numberOfCharacters - 1; i++) {
 			result += createOutputLine(createNthCharacter(i), numberOfCharacters);
 			if (character != 'A')
 				result += '\n';
