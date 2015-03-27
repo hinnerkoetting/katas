@@ -3,47 +3,48 @@ package de.oetting.kata.diamond;
 public class DiamondPrinter {
 
 	public String print(char character) {
-		int maxLengthOfDiamond = character - 'A' + 1;
-		String upperHalf = createLinesUntilWidestPoint(character, maxLengthOfDiamond);
-		String lowerHalf = createStringUntilBottom(maxLengthOfDiamond);
+		int numberOfCharacters = character - 'A' + 1;
+		String upperHalf = createLinesUntilWidestPoint(character, numberOfCharacters);
+		String lowerHalf = createStringUntilBottom(numberOfCharacters);
 		return upperHalf + lowerHalf;
 	}
 
 	private String createStringUntilBottom(int maxLengthOfDiamond) {
 		String result = "";
 		for (int i = maxLengthOfDiamond - 2; i >= 0; i--) {
-			result += print((char)('A' + i), maxLengthOfDiamond);
-			if ((char)('A' + i) != 'A') 
+			result += print((char) ('A' + i), maxLengthOfDiamond);
+			if ((char) ('A' + i) != 'A')
 				result += '\n';
 		}
 		return result;
 	}
 
-	private String createLinesUntilWidestPoint(char character, int maxLengthOfDiamond) {
+	private String createLinesUntilWidestPoint(char character, int numberOfCharacters) {
 		String result = "";
-		for (int i = 0; i < maxLengthOfDiamond; i++) {
-			result += print((char)('A' + i), maxLengthOfDiamond);
+		for (int i = 0; i < numberOfCharacters; i++) {
+			result += print((char) ('A' + i), numberOfCharacters);
 			if (character != 'A')
 				result += '\n';
 		}
 		return result;
 	}
 
-	private String print(char c, int maxLengthOfDiamond) {
+	private String print(char c, int numberOfCharacters) {
 		if (c == 'A') {
-			return createTextForA(maxLengthOfDiamond);
+			return createTextForA(numberOfCharacters);
 		}
 		if (c == 'B') {
-			if (maxLengthOfDiamond == 2)
-				return "B B";
-			else 
-				return " B B";
+			return createTextForB(numberOfCharacters);
 		}
-		return "C    C";
+		return "C   C";
 	}
 
-	private String createTextForA(int maxLengthOfDiamond) {
-		String spaces = timesSpace(maxLengthOfDiamond - 1);
+	private String createTextForB(int numberOfCharacters) {
+		return timesSpace(numberOfCharacters - 2) + "B B";
+	}
+
+	private String createTextForA(int numberOfCharacters) {
+		String spaces = timesSpace(numberOfCharacters - 1);
 		return spaces + "A";
 	}
 
