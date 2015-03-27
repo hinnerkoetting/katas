@@ -3,46 +3,26 @@ package de.oetting.kata.diamond;
 public class DiamondPrinter {
 
 	public String print(char character) {
-		String upperHalf = createUpperHalf(character);
-		String middleLine = createMiddleLine(character);
-		String lowerHalf = createLowerHalf(character);
-		return upperHalf + middleLine + lowerHalf;
+		String upperHalf = createDiamond(character);
+		return removeLastNewLine(upperHalf);
 	}
 
-	private String createUpperHalf(char character) {
+	private String removeLastNewLine(String upperHalf) {
+		return upperHalf.substring(0, upperHalf.length() - 1);
+	}
+
+	private String createDiamond(char character) {
 		String result = "";
-		for (int i = 0; i < getNumberOfDifferentCharacters(character) - 1; i++) {
-			result += createOutputLine(i, character) + '\n';
+		for (char currentCharacter : new CharactersForEachLine(character)) {
+			result += createOutputLine(currentCharacter, character) + '\n';
 		}
 		return result;
 	}
 
-	private String createMiddleLine(char character) {
-		String line = createOutputLine(getNumberOfDifferentCharacters(character) - 1,
-				character);
-		if (getNumberOfDifferentCharacters(character) == 1)
-			return line;
-		return line + '\n';
-	}
-
-	private String createLowerHalf(char character) {
-		String result = "";
-		for (int i = getNumberOfDifferentCharacters(character) - 2; i >= 0; i--) {
-			result += createOutputLine(i, character);
-			if (createNthCharacter(i) != 'A')
-				result += '\n';
-		}
-		return result;
-	}
-
-	private char createNthCharacter(int i) {
-		return (char) ('A' + i);
-	}
-
-	private String createOutputLine(int characterIndex, char inputCharacter) {
-		if (characterIndex == 0)
+	private String createOutputLine(char character, char inputCharacter) {
+		if (character == 'A')
 			return createTextForA(getNumberOfDifferentCharacters(inputCharacter));
-		return createOutputLineForNonA(createNthCharacter(characterIndex), getNumberOfDifferentCharacters(inputCharacter));
+		return createOutputLineForNonA(character, getNumberOfDifferentCharacters(inputCharacter));
 	}
 
 	private String createOutputLineForNonA(char c, int numberOfCharacters) {
