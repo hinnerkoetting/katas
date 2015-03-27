@@ -30,13 +30,18 @@ public class DiamondPrinter {
 	}
 
 	private String print(char c, int numberOfCharacters) {
-		if (c == 'A') {
+		if (c == 'A')
 			return createTextForA(numberOfCharacters);
-		}
-		if (c == 'B') {
+		if (c == 'B')
 			return createTextForB(numberOfCharacters);
-		}
-		return "C   C";
+		if (c == 'C')
+			return createTextForC(numberOfCharacters);
+
+		return "D     D";
+	}
+
+	private String createTextForC(int numberOfCharacters) {
+		return timesSpace(numberOfCharacters - 3) + "C   C";
 	}
 
 	private String createTextForB(int numberOfCharacters) {

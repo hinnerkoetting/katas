@@ -6,38 +6,35 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Collection;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class DiamondPrinterTest {
 
-	@Test
-	public void create_characterA_returnsA() {
-		String output = whenCreating('A');
-		assertEquals(readFile('a'), output);
+	private char character;
+
+	@Parameters(name = "testedCharacter = {0}")
+	public static Collection<Object[]> getParameters() {
+		return Arrays.asList(new Object[][] { { 'A' }, { 'B' }, { 'C' }, { 'D' }});
+	}
+
+	public DiamondPrinterTest(char character) {
+		this.character = character;
 	}
 
 	@Test
-	public void create_characterB_returnsDiamongWithB() {
-		String output = whenCreating('B');
-		assertEquals(readFile('b'), output);
+	public void createdExpectedInput() {
+		String output = whenCreating(character);
+		assertEquals(readSolution(character), output);
 	}
 
-	@Test
-	public void create_characterC_returnsDiamongWithC() {
-		String output = whenCreating('C');
-		assertEquals(readFile('c'), output);
-	}
-
-	@Ignore
-	@Test
-	public void create_characterD_returnsDiamongWithD() {
-		String output = whenCreating('D');
-		assertEquals(readFile('d'), output);
-	}
-
-	private String readFile(char character) {
+	private String readSolution(char character) {
 		InputStream stream = getClass().getResourceAsStream("/" + character + "-result");
 		InputStreamReader reader = new InputStreamReader(stream);
 		return readStream(new BufferedReader(reader));
