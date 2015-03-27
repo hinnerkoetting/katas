@@ -3,8 +3,8 @@ package de.oetting.kata.diamond;
 public class DiamondPrinter {
 
 	public String print(char character) {
-		String diamong = createDiamond(character);
-		return removeLastNewLineCharacter(diamong);
+		String diamond = createDiamond(character);
+		return removeLastNewLineCharacter(diamond);
 	}
 
 	private String createDiamond(char character) {

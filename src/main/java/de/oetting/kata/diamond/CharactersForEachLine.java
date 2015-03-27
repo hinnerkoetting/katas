@@ -35,12 +35,12 @@ public class CharactersForEachLine implements Iterable<Character> {
 				currentIndex++;
 				if (isInUpperHalf())
 					return createCharacterAtIndex();
-				return createCharacterfromLowerHalfOfDiamong();
+				return createCharacterfromLowerHalfOfDiamond();
 			}
 
 			//The idea here is to count down from the target character.
 			//This is done by counting up as usual, but subtracting a difference from currentIndex * 2. This way the character is decreased by 1 each step.
-			private char createCharacterfromLowerHalfOfDiamong() {
+			private char createCharacterfromLowerHalfOfDiamond() {
 				return (char) (createCharacterAtIndex() + (character - createCharacterAtIndex()) * 2 );
 			}
 
