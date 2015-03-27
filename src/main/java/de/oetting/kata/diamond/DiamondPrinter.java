@@ -3,16 +3,27 @@ package de.oetting.kata.diamond;
 public class DiamondPrinter {
 
 	public String print(char character) {
-		String result = "";
 		int maxLengthOfDiamond = character - 'A' + 1;
-		for (int i = 0; i < maxLengthOfDiamond; i++) {
-			result += print((char)('A' + i), maxLengthOfDiamond);
-			if (character != 'A')
-				result += '\n';
-		}
+		String upperHalf = createLinesUntilWidestPoint(character, maxLengthOfDiamond);
+		String lowerHalf = createStringUntilBottom(maxLengthOfDiamond);
+		return upperHalf + lowerHalf;
+	}
+
+	private String createStringUntilBottom(int maxLengthOfDiamond) {
+		String result = "";
 		for (int i = maxLengthOfDiamond - 2; i >= 0; i--) {
 			result += print((char)('A' + i), maxLengthOfDiamond);
 			if ((char)('A' + i) != 'A') 
+				result += '\n';
+		}
+		return result;
+	}
+
+	private String createLinesUntilWidestPoint(char character, int maxLengthOfDiamond) {
+		String result = "";
+		for (int i = 0; i < maxLengthOfDiamond; i++) {
+			result += print((char)('A' + i), maxLengthOfDiamond);
+			if (character != 'A')
 				result += '\n';
 		}
 		return result;
