@@ -17,6 +17,12 @@ public class DiamondPrinterTest {
 		String output = whenCreating('B');
 		assertEquals(" A\nB B\n A", output);
 	}
+	
+	@Test
+	public void create_characterC_returnsDiamongWithC() {
+		String output = whenCreating('C');
+		assertEquals("  A\n B B\nC    C\n B B\n  A", output);
+	}
 
 	private String whenCreating(char character) {
 		return new DiamondPrinter().print(character);

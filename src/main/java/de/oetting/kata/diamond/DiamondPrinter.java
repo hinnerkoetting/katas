@@ -2,15 +2,18 @@ package de.oetting.kata.diamond;
 
 public class DiamondPrinter {
 
-	public String print(Character character) {
+	public String print(char character) {
 		String result = "";
 		int maxLengthOfDiamond = character - 'A' + 1;
-		if (character.equals('A')) {
-			result += print('A', 1);
-		} else {
-			result += print('A', maxLengthOfDiamond) + '\n';
-			result += print('B', maxLengthOfDiamond) + '\n';
-			result += print('A', maxLengthOfDiamond);
+		for (int i = 0; i < maxLengthOfDiamond; i++) {
+			result += print((char)('A' + i), maxLengthOfDiamond);
+			if (character != 'A')
+				result += '\n';
+		}
+		for (int i = maxLengthOfDiamond - 2; i >= 0; i--) {
+			result += print((char)('A' + i), maxLengthOfDiamond);
+			if ((char)('A' + i) != 'A') 
+				result += '\n';
 		}
 		return result;
 	}
@@ -19,11 +22,18 @@ public class DiamondPrinter {
 		if (c == 'A') {
 			if (maxLengthOfDiamond == 1)
 				return "A";
-			else
+			if (maxLengthOfDiamond == 2)
 				return " A";
-		} else {
-			return "B B";
+			else 
+				return "  A";
 		}
+		if (c == 'B') {
+			if (maxLengthOfDiamond == 2)
+				return "B B";
+			else 
+				return " B B";
+		}
+		return "C    C";
 	}
 
 }
