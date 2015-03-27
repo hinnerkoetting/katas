@@ -20,12 +20,7 @@ public class DiamondPrinter {
 
 	private String print(char c, int maxLengthOfDiamond) {
 		if (c == 'A') {
-			if (maxLengthOfDiamond == 1)
-				return "A";
-			if (maxLengthOfDiamond == 2)
-				return " A";
-			else 
-				return "  A";
+			return createTextForA(maxLengthOfDiamond);
 		}
 		if (c == 'B') {
 			if (maxLengthOfDiamond == 2)
@@ -34,6 +29,18 @@ public class DiamondPrinter {
 				return " B B";
 		}
 		return "C    C";
+	}
+
+	private String createTextForA(int maxLengthOfDiamond) {
+		String spaces = timesSpace(maxLengthOfDiamond - 1);
+		return spaces + "A";
+	}
+
+	private String timesSpace(int times) {
+		String result = "";
+		for (int i = 0; i < times; i++)
+			result += ' ';
+		return result;
 	}
 
 }
