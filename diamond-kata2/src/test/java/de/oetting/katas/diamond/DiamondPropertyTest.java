@@ -1,6 +1,8 @@
 package de.oetting.katas.diamond;
 
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
@@ -11,6 +13,7 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -112,6 +115,32 @@ public class DiamondPropertyTest {
 			assertThat(line, new NumberMatcher(center - distanceToCenter));
 			assertThat(line, new NumberMatcher(center + distanceToCenter));
 		}
+	}
+
+	// First line a
+	// Second line b
+	// Third line c
+	@Test
+	public void eachLineHasHigherOrLowerCharacterThanLastLine() {
+		PrintableObject diamond = whenCreatingDiamond();
+		char lastCharacter = 'A';
+		for (int i = 1; i < diamond.getNumberOfLines(); i++) {
+			Line line = diamond.getLines().get(i);
+			if (line.getText().contains(createLowerCharacter(lastCharacter))) 
+				lastCharacter = createLowerCharacter(lastCharacter).charAt(0);
+			else if (line.getText().contains(createrHigherCharacter(lastCharacter))) 
+				lastCharacter = createrHigherCharacter(lastCharacter).charAt(0);
+			else
+				fail("Line must have higher or lower character than last " + lastCharacter + ". But it was " + line);
+		}
+	}
+
+	private String createLowerCharacter(char lastCharacter) {
+		return new Character((char) (lastCharacter - 1)).toString();
+	}
+
+	private String createrHigherCharacter(char lastCharacter) {
+		return new Character((char) (lastCharacter + 1)).toString();
 	}
 
 	private Line getFirstLine(PrintableObject diamond) {

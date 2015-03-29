@@ -15,7 +15,7 @@ public class Diamond {
 	private String createRow(char currentCharacter, char targetCharacter) {
 		if (currentCharacter == 'A')
 			return createSpaces((targetCharacter - 'A')) + "A" + createSpaces((targetCharacter - 'A'));
-		return createSpacesBeforeOrAfterCharacter(currentCharacter, targetCharacter) + "A" + createSpaces((currentCharacter - 'A') * 2 - 1) + "A"
+		return createSpacesBeforeOrAfterCharacter(currentCharacter, targetCharacter) + currentCharacter + createSpaces((currentCharacter - 'A') * 2 - 1) + currentCharacter
 				+ createSpacesBeforeOrAfterCharacter(currentCharacter, targetCharacter);
 	}
 
