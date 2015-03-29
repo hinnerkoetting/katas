@@ -11,6 +11,10 @@ public class Line {
 	public String getText() {
 		return text;
 	}
+
+	public int getLength() {
+		return text.length();
+	}
 	
 	
 }

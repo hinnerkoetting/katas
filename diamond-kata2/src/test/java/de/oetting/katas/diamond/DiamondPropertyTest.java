@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
@@ -50,10 +51,21 @@ public class DiamondPropertyTest {
 	@Test
 	public void hasCorrectNumberOfLines() {
 		PrintableObject diamond = whenCreatingDiamond();
-		int characterIndex = character - 'A';
-		assertThat(diamond.getNumberOfLines(), is(equalTo(characterIndex * 2 + 1)));
+		assertThat(diamond.getNumberOfLines(), is(equalTo(getNumberOfExpectedLines())));
 	}
 
+	
+	@Test
+	public void eachLineLengthIsEqualToNumberOfRows() {
+		PrintableObject diamond = whenCreatingDiamond();
+		for (Line line: diamond.getLines())
+			assertEquals(line.getLength(), getNumberOfExpectedLines());
+	}
+
+	private int getNumberOfExpectedLines() {
+		int characterIndex = character - 'A';
+		return characterIndex * 2 + 1;
+	}
 	private PrintableObject whenCreatingDiamond() {
 		return new Diamond().create(character);
 	}
