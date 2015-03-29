@@ -61,14 +61,14 @@ public class DiamondPropertyTest {
 		for (Line line : diamond.getLines())
 			assertEquals(line.getLength(), getNumberOfExpectedLines());
 	}
-	
+
 	@Test
 	public void eachLineContainsAtLeastOneCharacter() {
 		PrintableObject diamond = whenCreatingDiamond();
 		for (Line line : diamond.getLines())
 			assertThat(line.getText(), new ContainsPattern("[A-Z]+"));
 	}
-	
+
 	@Test
 	public void eachLineExpectedFirstAndLastContainsTwoCharacters() {
 		PrintableObject diamond = whenCreatingDiamond();
@@ -76,6 +76,15 @@ public class DiamondPropertyTest {
 			Line line = diamond.getLines().get(i);
 			assertThat(line.getText(), new ContainsPattern("[A-Z]\\s*[A-Z]"));
 		}
+	}
+
+	@Test
+	public void firstAndLastLineOnlyHaveOneCharacter() {
+		PrintableObject diamond = whenCreatingDiamond();
+		Line firstLine = diamond.getLines().get(0);
+		assertThat(firstLine.getText(), new ContainsPattern("[A-Z]"));
+		Line lastLine = diamond.getLines().get(diamond.getNumberOfLines() - 1);
+		assertThat(lastLine.getText(), new ContainsPattern("[A-Z]"));
 	}
 
 	private int getNumberOfExpectedLines() {
