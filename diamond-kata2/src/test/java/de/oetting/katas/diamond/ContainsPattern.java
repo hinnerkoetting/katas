@@ -3,9 +3,9 @@ package de.oetting.katas.diamond;
 import java.util.regex.Pattern;
 
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeDiagnosingMatcher;
+import org.hamcrest.TypeSafeMatcher;
 
-public class ContainsPattern extends TypeSafeDiagnosingMatcher<String> {
+public class ContainsPattern extends TypeSafeMatcher<String> {
 
 	private final String expectedPattern;
 
@@ -18,8 +18,12 @@ public class ContainsPattern extends TypeSafeDiagnosingMatcher<String> {
 	}
 
 	@Override
-	protected boolean matchesSafely(String arg0, Description arg1) {
-		return Pattern.matches(expectedPattern, arg0);
+	protected void describeMismatchSafely(String item, Description mismatchDescription) {
+		mismatchDescription.appendText(item);
 	}
 
+	@Override
+	protected boolean matchesSafely(String arg0) {
+		return Pattern.matches(expectedPattern, arg0);
+	}
 }

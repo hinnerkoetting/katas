@@ -13,7 +13,9 @@ public class Diamond {
 	}
 
 	private String createRow(char character) {
-		return "A" +  createSpaces((character - 'A') * 2);
+		if (character == 'A') 
+			return "A" ;
+		return "AA" +  createSpaces((character - 'A') * 2 - 1);
 	}
 	
 	private String createSpaces(int number) {
