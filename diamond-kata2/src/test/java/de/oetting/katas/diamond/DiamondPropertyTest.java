@@ -124,14 +124,19 @@ public class DiamondPropertyTest {
 	public void eachLineHasHigherOrLowerCharacterThanLastLine() {
 		PrintableObject diamond = whenCreatingDiamond();
 		char lastCharacter = 'A';
-		for (int i = 1; i < diamond.getNumberOfLines(); i++) {
+		for (int i = 1; i < diamond.getNumberOfLines() / 2 + 1; i++) {
+			Line line = diamond.getLines().get(i);
+			if (line.getText().contains(createrHigherCharacter(lastCharacter))) 
+				lastCharacter = createrHigherCharacter(lastCharacter).charAt(0);
+			else
+				fail("Line must have higher character than last " + lastCharacter + ". But it was " + line);
+		}
+		for (int i = diamond.getNumberOfLines() / 2 + 1 ; i < diamond.getNumberOfLines(); i++) {
 			Line line = diamond.getLines().get(i);
 			if (line.getText().contains(createLowerCharacter(lastCharacter))) 
 				lastCharacter = createLowerCharacter(lastCharacter).charAt(0);
-			else if (line.getText().contains(createrHigherCharacter(lastCharacter))) 
-				lastCharacter = createrHigherCharacter(lastCharacter).charAt(0);
 			else
-				fail("Line must have higher or lower character than last " + lastCharacter + ". But it was " + line);
+				fail("Line must have lower character than last " + lastCharacter + ". But it was " + line);
 		}
 	}
 
