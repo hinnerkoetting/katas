@@ -1,10 +1,13 @@
 package de.oetting.katas.diamond;
 
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -13,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -59,14 +63,14 @@ public class DiamondPropertyTest {
 	public void eachLineLengthIsEqualToNumberOfRows() {
 		PrintableObject diamond = whenCreatingDiamond();
 		for (Line line : diamond.getLines())
-			assertEquals(line.getLength(), getNumberOfExpectedLines());
+			assertEquals(getNumberOfExpectedLines(), line.getLength());
 	}
 
 	@Test
 	public void eachLineContainsAtLeastOneCharacter() {
 		PrintableObject diamond = whenCreatingDiamond();
 		for (Line line : diamond.getLines())
-			assertThat(line.getText(), new ContainsPattern("[A-Z]+"));
+			assertThat(line.getText(), new ContainsPattern(".*[A-Z]+.*"));
 	}
 
 	@Test
@@ -95,11 +99,25 @@ public class DiamondPropertyTest {
 		Line lastLine = diamond.getLines().get(diamond.getNumberOfLines() - 1);
 		assertThat(lastLine, new HasCharacterInCenter('A'));
 	}
-	
+
+	// B has distance 1 to center
+	// C has distance 2 to center...
+	@Test
+	public void allCharactersInLinesExceptFirstAndLastHaveRightDistanceToCenter() {
+		PrintableObject diamond = whenCreatingDiamond();
+		for (int i = 1; i < diamond.getNumberOfLines() - 1; i++) {
+			Line line = diamond.getLines().get(i);
+			int center = line.getLength() / 2;
+			int distanceToCenter = i <= diamond.getNumberOfLines() / 2 ? i : diamond.getNumberOfLines() - i - 1;
+			assertThat(line, new NumberMatcher(center - distanceToCenter));
+			assertThat(line, new NumberMatcher(center + distanceToCenter));
+		}
+	}
+
 	private Line getFirstLine(PrintableObject diamond) {
 		return diamond.getLines().get(0);
 	}
-	
+
 	private int getNumberOfExpectedLines() {
 		int characterIndex = character - 'A';
 		return characterIndex * 2 + 1;
