@@ -81,12 +81,25 @@ public class DiamondPropertyTest {
 	@Test
 	public void firstAndLastLineOnlyHaveOneCharacter() {
 		PrintableObject diamond = whenCreatingDiamond();
-		Line firstLine = diamond.getLines().get(0);
+		Line firstLine = getFirstLine(diamond);
 		assertThat(firstLine.getText(), new ContainsPattern("[A-Z]"));
 		Line lastLine = diamond.getLines().get(diamond.getNumberOfLines() - 1);
 		assertThat(lastLine.getText(), new ContainsPattern("[A-Z]"));
 	}
 
+	@Test
+	public void firstAndLastLineHaveCharacterAInTheCenterOfTheLine() {
+		PrintableObject diamond = whenCreatingDiamond();
+		Line firstLine = getFirstLine(diamond);
+		assertThat(firstLine, new HasCharacterInCenter('A'));
+		Line lastLine = diamond.getLines().get(diamond.getNumberOfLines() - 1);
+		assertThat(lastLine, new HasCharacterInCenter('A'));
+	}
+	
+	private Line getFirstLine(PrintableObject diamond) {
+		return diamond.getLines().get(0);
+	}
+	
 	private int getNumberOfExpectedLines() {
 		int characterIndex = character - 'A';
 		return characterIndex * 2 + 1;

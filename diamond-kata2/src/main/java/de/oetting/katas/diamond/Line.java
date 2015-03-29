@@ -15,6 +15,10 @@ public class Line {
 	public int getLength() {
 		return text.length();
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Line [text=" + text + "]";
+	}
+
 }
