@@ -20,4 +20,12 @@ public class PrintableObject {
 		return lines.size();
 	}
 	
+	public String createString() {
+		String result = "";
+		for (Line line: lines) {
+			result += line.getText() + "\n";
+		}
+		return result.substring(0, result.length() - 1);
+	}
+	
 }
