@@ -15,5 +15,9 @@ public class PrintableObject {
 	public void addLine(String line) {
 		lines.add(new Line(line));
 	}
+
+	public int getNumberOfLines() {
+		return lines.size();
+	}
 	
 }

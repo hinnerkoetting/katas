@@ -1,6 +1,7 @@
 package de.oetting.katas.diamond;
 
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -41,6 +42,16 @@ public class DiamondPropertyTest {
 	public void hasAtLeastOneLine() {
 		PrintableObject diamond = whenCreatingDiamond();
 		assertThat(diamond.getLines(), hasSize(greaterThan(0)));
+	}
+	
+	//One line for 'A'
+	//Three lines for 'B'
+	//Fife lines for 'C'...
+	@Test
+	public void hasCorrectNumberOfLines() {
+		PrintableObject diamond = whenCreatingDiamond();
+		int characterIndex = character - 'A';
+		assertThat(diamond.getNumberOfLines(), is(equalTo(characterIndex * 2 + 1)));
 	}
 
 	private PrintableObject whenCreatingDiamond() {
