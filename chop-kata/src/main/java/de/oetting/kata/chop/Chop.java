@@ -8,17 +8,17 @@ public class Chop {
 		return find(list, element, 0, list.size() - 1);
 	}
 
-	private <S extends Comparable<S>> int find(List<S> list, S element, int min, int max) {
-		int newPivot = (max + min) / 2;
-		if (newPivot < min)
+	private <S extends Comparable<S>> int find(List<S> list, S element, int minIndex, int maxIndex) {
+		int pivotElement = (maxIndex + minIndex) / 2;
+		if (pivotElement < minIndex)
 			return -1;
-		if (newPivot > max)
+		if (pivotElement > maxIndex)
 			return -1;
-		int comparison = list.get(newPivot).compareTo(element);
+		int comparison = list.get(pivotElement).compareTo(element);
 		if (comparison == 0)
-			return newPivot;
+			return pivotElement;
 		if (comparison < 0)
-			return find(list, element, newPivot + 1, max);
-		return find(list, element, min, newPivot - 1);
+			return find(list, element, pivotElement + 1, maxIndex);
+		return find(list, element, minIndex, pivotElement - 1);
 	}
 }
