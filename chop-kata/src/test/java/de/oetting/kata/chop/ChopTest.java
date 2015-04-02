@@ -53,6 +53,13 @@ public class ChopTest {
 		int position = whenFindingElement(5);
 		assertEquals(4, position);
 	}
+	
+	@Test
+	public void find_secondHighedElementInListWithFifeElements_returnsElementsPosition() {
+		givenListContains(1, 2, 3, 4, 5);
+		int position = whenFindingElement(2);
+		assertEquals(1, position);
+	}
 
 	private void givenListContains(Integer... numbers) {
 		list.addAll(Arrays.asList(numbers));

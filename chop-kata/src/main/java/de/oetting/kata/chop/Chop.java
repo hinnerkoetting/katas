@@ -12,24 +12,29 @@ public class Chop {
 		if (comparison == 0)
 			return middle;
 		if (comparison < 0)
-			return findInBiggerHalf(list, element, middle);
-		if (list.get(0) == element)
-			return 0;
-		return -1;
+			return findInBiggerHalf(list, element, middle + 1, middle + 1, list.size() - 1);
+		return findInLowerHalf(list, element, middle, 0, middle - 1);
 	}
-
-	private <S extends Comparable<S>> int findInBiggerHalf(List<S> list, S element, int pivot) {
-		if (list.size() <= pivot + 1) {
+	private <S extends Comparable<S>> int findInBiggerHalf(List<S> list, S element, int pivot, int min, int max) {
+		if (max < pivot) {
 			return -1;
 		}
-		int newPivot = (list.size() + pivot) / 2;
+		int newPivot = (max + pivot) / 2;
 		int comparison = list.get(newPivot).compareTo(element);
 		if (comparison == 0)
 			return newPivot;
-		if (comparison < 0) {
-			return findInBiggerHalf(list, element, newPivot);
-		}
-		return -1;
-
+		if (comparison < 0)
+			return findInBiggerHalf(list, element, newPivot + 1, newPivot + 1, max);
+		return findInLowerHalf(list, element, newPivot - 1, min, newPivot - 1);
+	}
+	
+	private <S extends Comparable<S>> int findInLowerHalf(List<S> list, S element, int pivot, int min, int max) {
+		int newPivot = pivot / 2;
+		int comparison = list.get(newPivot).compareTo(element);
+		if (comparison == 0)
+			return newPivot;
+		if (comparison < 0)
+			return findInBiggerHalf(list, element, newPivot + 1, newPivot + 1, max );
+		return findInLowerHalf(list, element, newPivot - 1, min, newPivot - 1);
 	}
 }
