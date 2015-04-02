@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class ChopParameterizedTest {
+public class ChopParameterizedWithAllElementsTest {
 
 
 	@Parameters(name = "List with {0} elements")
@@ -33,7 +33,7 @@ public class ChopParameterizedTest {
 	private int numberOfElements;
 	private List<Integer> list;
 	
-	public ChopParameterizedTest(int numberOfElements) {
+	public ChopParameterizedWithAllElementsTest(int numberOfElements) {
 		this.numberOfElements = numberOfElements;
 		list = new ArrayList<>();
 		for (int i = 0; i < numberOfElements; i++ ){

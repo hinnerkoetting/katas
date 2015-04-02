@@ -29,6 +29,8 @@ public class Chop {
 	}
 	
 	private <S extends Comparable<S>> int findInLowerHalf(List<S> list, S element, int pivot, int min, int max) {
+		if (pivot < min)
+			return -1;
 		int newPivot = pivot / 2;
 		int comparison = list.get(newPivot).compareTo(element);
 		if (comparison == 0)
