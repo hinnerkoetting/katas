@@ -16,3 +16,11 @@ http://www.natpryce.com/articles/000807.html
      B B
       A
 -----
+
+Karate Chop
+http://codekata.com/kata/kata02-karate-chop/
+
+
+    Implement a binary search routine (using the specification below) in the language and technique of your choice. 
+-----    
+
