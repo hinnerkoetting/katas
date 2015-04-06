@@ -30,7 +30,7 @@ public class LinkedListTest {
 		whenRemoving(0);
 		assertTrue(classUnderTest.isEmpty());
 	}
-	
+
 	@Test
 	public void add_canGetPreviousValue() {
 		classUnderTest = new LinkedList();
@@ -38,20 +38,20 @@ public class LinkedListTest {
 		String value = whenGettingValue(0);
 		assertEquals("a", value);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void remove_listIsEmpty_throwsIllegalArgumentException() {
 		classUnderTest = new LinkedList();
 		whenRemoving(0);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void remove_indexDoesnotExist_throwsIllegalArgumentException() {
 		classUnderTest = new LinkedList();
 		whenAdding("a");
 		whenRemoving(1);
 	}
-	
+
 	@Test
 	public void remove_thenGetReturnsFollowingValue() {
 		classUnderTest = new LinkedList();
@@ -60,7 +60,34 @@ public class LinkedListTest {
 		whenRemoving(0);
 		assertEquals("b", classUnderTest.get(0));
 	}
-	
+
+	@Test
+	public void contains_elementWasAdded_returnsTrue() {
+		classUnderTest = new LinkedList();
+		whenAdding("a");
+		boolean contains = contains("a");
+		assertTrue(contains);
+	}
+
+	@Test
+	public void contains_elementWasNotAdded_returnsFalse() {
+		classUnderTest = new LinkedList();
+		whenAdding("a");
+		boolean contains = contains("b");
+		assertFalse(contains);
+	}
+
+	@Test
+	public void contains_emptyList_returnsFalse() {
+		classUnderTest = new LinkedList();
+		boolean contains = contains("a");
+		assertFalse(contains);
+	}
+
+	private boolean contains(String value) {
+		return classUnderTest.contains(value);
+	}
+
 	private String whenGettingValue(int index) {
 		return classUnderTest.get(index);
 	}

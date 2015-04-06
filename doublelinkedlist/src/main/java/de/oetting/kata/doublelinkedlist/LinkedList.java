@@ -4,7 +4,7 @@ public class LinkedList {
 
 	private int size = 0;
 	private Node firstNode;
-	
+
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -48,11 +48,11 @@ public class LinkedList {
 	}
 
 	public void remove(int index) {
-		if (size <= index) 
+		if (size <= index)
 			throw new IllegalArgumentException("Index is out of range " + index + ". Size is " + size);
 		size--;
 		changePointersAroundDeletedNode(index);
-		if (index == 0) 
+		if (index == 0)
 			firstNode = firstNode.getNext();
 	}
 
@@ -67,17 +67,26 @@ public class LinkedList {
 	public String get(int index) {
 		return getNodeAtIndex(index).getValue();
 	}
-	
+
 	private Node getNodeAtIndex(int index) {
 		Node pointer = firstNode;
 		for (int i = 0; i < index; i++)
 			pointer = pointer.getNext();
 		return pointer;
 	}
-	
 
 	public int size() {
 		return size;
+	}
+
+	public boolean contains(String value) {
+		Node pointer = firstNode;
+		for (int i = 0; i < size(); i++) {
+			if (pointer.getValue().equals(value))
+				return true;
+			pointer = pointer.getNext();
+		}
+		return false;
 	}
 
 }
