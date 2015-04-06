@@ -22,6 +22,7 @@ public class LinkedList {
 			lastNode.setNext(node);
 			node.setPrevious(lastNode);
 			firstNode.setPrevious(node);
+			node.setNext(firstNode);
 		}
 	}
 
@@ -30,9 +31,9 @@ public class LinkedList {
 	}
 
 	public void remove(int index) {
-		size--;
-		if (size < index) 
+		if (size <= index) 
 			throw new IllegalArgumentException("Index is out of range " + index + ". Size is " + size);
+		size--;
 		Node node = getNodeAtIndex(index);
 		Node previous = node.getPrevious();
 		Node next = node.getNext();

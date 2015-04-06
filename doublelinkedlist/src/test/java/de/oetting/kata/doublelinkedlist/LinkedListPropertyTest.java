@@ -15,7 +15,6 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class LinkedListPropertyTest {
 
-
 	@Parameters
 	public static Collection<Object[]> createParameters() {
 		Object[][] parameters = new Object[20][];
@@ -30,15 +29,15 @@ public class LinkedListPropertyTest {
 		for (int i = 0; i < numberOfParameters; i++) {
 			parameters.add(String.valueOf('A' + i));
 		}
-		return new Object[] { parameters};
+		return new Object[] { parameters };
 	}
-	
+
 	private List<String> parameters;
-	
+
 	public LinkedListPropertyTest(List<String> parameters) {
 		this.parameters = parameters;
 	}
-	
+
 	@Test
 	public void addEachItem_listHasSizeOfNumberOfItems() {
 		LinkedList classUnderTest = new LinkedList();
@@ -54,9 +53,34 @@ public class LinkedListPropertyTest {
 			assertEquals("Parameter at index " + i + " must be equal", parameters.get(i), classUnderTest.get(i));
 		}
 	}
-	
+
+	@Test
+	public void deleteFirstElement_allOtherElementsAreMovedByOne() {
+		if (parameters.size() < 1)
+			return;
+		LinkedList classUnderTest = new LinkedList();
+		addAll(classUnderTest);
+		classUnderTest.remove(0);
+		for (int i = 0; i < classUnderTest.size(); i++) {
+			assertEquals("Parameter at index " + i + " must be equal", parameters.get(i + 1), classUnderTest.get(i));
+		}
+	}
+
+	@Test
+	public void deleteSecondElement_allLaterElementsAreMovedByOne() {
+		if (parameters.size() < 2)
+			return;
+		LinkedList classUnderTest = new LinkedList();
+		addAll(classUnderTest);
+		classUnderTest.remove(1);
+		for (int i = 1; i < classUnderTest.size(); i++) {
+			assertEquals("Parameter at index " + i + " must be equal", parameters.get(i + 1), classUnderTest.get(i));
+		}
+		assertEquals(parameters.get(0), classUnderTest.get(0));
+	}
+
 	private void addAll(LinkedList classUnderTest) {
-		for (String parameter: parameters) {
+		for (String parameter : parameters) {
 			classUnderTest.add(parameter);
 		}
 	}
