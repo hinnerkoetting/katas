@@ -11,19 +11,36 @@ public class LinkedList {
 
 	public void add(String value) {
 		size++;
+		Node node = createNode(value);
+		if (noNodeExists()) {
+			createFirstNode(node);
+		} else {
+			appendNodeAtTheEnd(node);
+		}
+	}
+
+	private Node createNode(String value) {
 		Node node = new Node();
 		node.setValue(value);
-		if (firstNode == null) {
-			firstNode = node;
-			firstNode.setPrevious(firstNode);
-			firstNode.setNext(firstNode);
-		} else {
-			Node lastNode = findLastNode();
-			lastNode.setNext(node);
-			node.setPrevious(lastNode);
-			firstNode.setPrevious(node);
-			node.setNext(firstNode);
-		}
+		return node;
+	}
+
+	private void createFirstNode(Node node) {
+		firstNode = node;
+		firstNode.setPrevious(firstNode);
+		firstNode.setNext(firstNode);
+	}
+
+	private void appendNodeAtTheEnd(Node node) {
+		Node lastNode = findLastNode();
+		lastNode.setNext(node);
+		node.setPrevious(lastNode);
+		firstNode.setPrevious(node);
+		node.setNext(firstNode);
+	}
+
+	private boolean noNodeExists() {
+		return firstNode == null;
 	}
 
 	private Node findLastNode() {
@@ -34,13 +51,17 @@ public class LinkedList {
 		if (size <= index) 
 			throw new IllegalArgumentException("Index is out of range " + index + ". Size is " + size);
 		size--;
+		changePointersAroundDeletedNode(index);
+		if (index == 0) 
+			firstNode = firstNode.getNext();
+	}
+
+	private void changePointersAroundDeletedNode(int index) {
 		Node node = getNodeAtIndex(index);
 		Node previous = node.getPrevious();
 		Node next = node.getNext();
 		previous.setNext(next);
 		next.setPrevious(previous);
-		if (index == 0) 
-			firstNode = firstNode.getNext();
 	}
 
 	public String get(int index) {

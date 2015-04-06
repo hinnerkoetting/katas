@@ -78,6 +78,7 @@ public class LinkedListPropertyTest {
 		}
 		assertEquals(parameters.get(0), classUnderTest.get(0));
 	}
+	
 
 	private void addAll(LinkedList classUnderTest) {
 		for (String parameter : parameters) {
