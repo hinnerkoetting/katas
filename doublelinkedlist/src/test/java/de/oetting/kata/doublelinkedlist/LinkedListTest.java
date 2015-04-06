@@ -39,6 +39,28 @@ public class LinkedListTest {
 		assertEquals("a", value);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void remove_listIsEmpty_throwsIllegalArgumentException() {
+		classUnderTest = new LinkedList();
+		whenRemoving(0);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void remove_indexDoesnotExist_throwsIllegalArgumentException() {
+		classUnderTest = new LinkedList();
+		whenAdding("a");
+		whenRemoving(1);
+	}
+	
+	@Test
+	public void remove_thenGetReturnsFollowingValue() {
+		classUnderTest = new LinkedList();
+		whenAdding("a");
+		whenAdding("b");
+		whenRemoving(0);
+		assertEquals("b", classUnderTest.get(0));
+	}
+	
 	private String whenGettingValue(int index) {
 		return classUnderTest.get(index);
 	}
