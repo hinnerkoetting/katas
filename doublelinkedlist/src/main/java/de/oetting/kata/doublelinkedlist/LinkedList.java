@@ -91,8 +91,11 @@ public class LinkedList {
 
 	public String[] toArray() {
 		String[] array = new String[size()];
-		for (int i = 0; i < array.length; i++)
-			array[i] = get(i);
+		Node pointer = firstNode;
+		for (int i = 0; i < array.length; i++) {
+			array[i] = pointer.getValue();
+			pointer = pointer.getNext();
+		}
 		return array;
 	}
 
