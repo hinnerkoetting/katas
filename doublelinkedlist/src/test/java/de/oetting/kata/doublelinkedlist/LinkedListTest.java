@@ -84,6 +84,25 @@ public class LinkedListTest {
 		assertFalse(contains);
 	}
 
+	@Test
+	public void toArray_emptyList_returnsEmptyArray() {
+		classUnderTest = new LinkedList();
+		String[] array = whenGettingArray();
+		assertEquals(0, array.length);
+	}
+	
+	@Test
+	public void toArray_listContainsElement_returnsArrayWithThisElement() {
+		classUnderTest = new LinkedList();
+		whenAdding("a");
+		String[] array = whenGettingArray();
+		assertEquals("a", array[0]);
+	}
+	
+	private String[] whenGettingArray() {
+		return classUnderTest.toArray();
+	}
+
 	private boolean contains(String value) {
 		return classUnderTest.contains(value);
 	}

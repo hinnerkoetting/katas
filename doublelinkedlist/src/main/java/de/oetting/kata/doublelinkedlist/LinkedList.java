@@ -89,4 +89,11 @@ public class LinkedList {
 		return false;
 	}
 
+	public String[] toArray() {
+		String[] array = new String[size()];
+		for (int i = 0; i < array.length; i++)
+			array[i] = get(i);
+		return array;
+	}
+
 }
