@@ -15,17 +15,18 @@ public class LinkedList {
 		node.setValue(value);
 		if (firstNode == null) {
 			firstNode = node;
+			firstNode.setPrevious(firstNode);
+			firstNode.setNext(firstNode);
 		} else {
 			Node lastNode = findLastNode();
 			lastNode.setNext(node);
+			node.setPrevious(lastNode);
+			firstNode.setPrevious(node);
 		}
 	}
 
 	private Node findLastNode() {
-		Node pointer = firstNode;
-		while (pointer.getNext() != null) 
-			pointer = pointer.getNext();
-		return pointer;
+		return firstNode.getPrevious();
 	}
 
 	public void remove(int index) {
