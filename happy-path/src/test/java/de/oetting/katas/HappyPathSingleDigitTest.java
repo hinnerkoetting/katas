@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class HappyPathTest {
+public class HappyPathSingleDigitTest {
 
 	private int number;
 
@@ -20,7 +20,7 @@ public class HappyPathTest {
 		return Arrays.asList(new Object[][] { { 1 }, { 2 }, { 3 }, { 4 }, { 5 }, { 6 }, { 7 }, { 8 }, { 9 } });
 	}
 
-	public HappyPathTest(int number) {
+	public HappyPathSingleDigitTest(int number) {
 		this.number = number;
 	}
 
