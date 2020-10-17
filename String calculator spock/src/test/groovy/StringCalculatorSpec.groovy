@@ -1,4 +1,3 @@
-import de.oetting.stringcalculator.NegativeNumberException
 import de.oetting.stringcalculator.StringCalculator
 import spock.lang.Specification
 
